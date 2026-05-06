@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { Book } from "../models/book/Book.js";
+import { verifyToken } from "../middleware/auth.js";
 
 const router = Router();
 
@@ -64,7 +65,7 @@ if(!title || !author)
   res.json(book);
 });
 
-router.delete("/books/:id", async (req, res) => {
+router.delete("/books/:id", verifyToken, async (req, res) => {
   const { id } = req.params;
   const book = await Book.findByPk(id);
 
