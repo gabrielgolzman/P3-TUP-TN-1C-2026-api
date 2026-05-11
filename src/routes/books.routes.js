@@ -21,7 +21,7 @@ router.get(`/books/:id`, async (req, res) => {
   res.json(book);
 });
 
-router.post("/books", async (req, res) => {
+router.post("/books", verifyToken,  async (req, res) => {
   const { title, author, rating, pageCount, summary, imageUrl, available } =
     req.body;
 
